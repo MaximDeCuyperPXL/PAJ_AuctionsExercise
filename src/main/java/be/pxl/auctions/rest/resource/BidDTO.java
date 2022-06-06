@@ -1,28 +1,20 @@
-package be.pxl.auctions.model;
+package be.pxl.auctions.rest.resource;
 
-import javax.persistence.*;
+import be.pxl.auctions.model.Bid;
+import be.pxl.auctions.model.User;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "bids")
-public class Bid {
-    @Id
-    @GeneratedValue
+public class BidDTO {
     private long id;
     private double amount;
     private LocalDate date;
-    @ManyToOne
-    private Auction auction;
-    @ManyToOne
     private User user;
 
-    public Bid() {
-    }
-
-    public Bid(User user, LocalDate date, double amount) {
-        this.user = user;
-        this.date = date;
-        this.amount = amount;
+    public BidDTO(Bid bid) {
+        this.id = bid.getId();
+        this.amount = bid.getAmount();
+        this.date = bid.getDate();
+        this.user = bid.getUser();
     }
 
     public long getId() {
@@ -47,14 +39,6 @@ public class Bid {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public Auction getAuction() {
-        return auction;
-    }
-
-    public void setAuction(Auction auction) {
-        this.auction = auction;
     }
 
     public User getUser() {
